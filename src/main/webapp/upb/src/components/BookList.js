@@ -1,11 +1,31 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Table ,Image, ButtonGroup,Button} from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faList} from '@fortawesome/free-solid-svg-icons';
+import {faList ,faTrash , faEdit} from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 
 class BookList extends React.Component {
+
+
+constructor(props){
+  super(props);
+  this.state = {
+    books :[]
+  };
+}
+componentDidMount(){
+  this.findAllBooks();
+  
+}
+findAllBooks(){
+ axios.get("http://localhost:8080/api/v1/rest/books")
+  .then(response =>response.data)
+  .then((data) => {
+    this.setState({books:data});
+  });
+}
     
     render() {
       return (
@@ -24,9 +44,28 @@ class BookList extends React.Component {
         </tr>
       </thead>
       <tbody>
+      { 
+      this.state.books.length === 0?
         <tr align ="center">
-          <td colSpan={6}>Pas de livre disponible actuellement</td>
+          <td colSpan="6" > Livre(s) disponible actuellement</td>
+      </tr> :
+      this.state.books.map((book) =>(
+        <tr key={book.id}>
+          <td>
+              <Image src={book.coverPhtotoURL} rounderCircle width= "40" headers="40"/>{book.title}
+          </td>
+          <td>{book.author}</td>
+          <td>{book.isbnNumber}</td>
+          <td>{book.price}</td>
+          <td>{book.language}</td>
+          <td>
+            <ButtonGroup>
+              <button size = "lg" variant="outline-primary"><FontAwesomeIcon icon = {faEdit}/></button>{''}
+              <button size = "ls" variant="outline-danger"><FontAwesomeIcon icon = {faTrash}/></button>
+            </ButtonGroup>
+          </td>
         </tr>
+    ))} 
       </tbody>
     </Table>
 

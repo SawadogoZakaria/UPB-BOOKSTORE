@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.upb.bookstore.model.Book;
 import com.upb.bookstore.service.BookService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @Controller
 @RestController
 @RequestMapping(path="/api/v1/rest" , name = "Book_App")

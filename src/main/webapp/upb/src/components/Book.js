@@ -17,7 +17,7 @@ class Book extends React.Component {
   submitBook(event){
     alert('Titre: '+this.state.title+',Auteur:'+this.state.author+', Numero ISBN :'+this.state.isbnNumber+', Prix:' +this.state.price+', Photo de couverture:' +this.state.coverPhotoURL+', Langue:' +this.state.language); 
     event.preveventDefault();
-  }
+  };
   bookChange(event){
 
     this.setState({[event.target.name]:event.target.value});
@@ -55,9 +55,10 @@ class Book extends React.Component {
                 <Form.Label>Langue</Form.Label>
                 <Form.Control required type="text" name='language' value={this.state.language} onChange={this.bookChange} className='{"bg-dark text white"}' placeholder="Indiquer la langue "/>
               </Form.Group><br/>
+              <Button size=''variant='success' type='submit'><FontAwesomeIcon icon={faSave} /> Soumettre</Button>
           </Card.Body>
           <Card.Footer style={{"textAlign":"right"}}>
-          <Button size=''variant='success' type='submit'><FontAwesomeIcon icon={faSave} /> Soumettre</Button>
+          {/*<Button size=''variant='success' type='submit'><FontAwesomeIcon icon={faSave} /> Soumettre</Button>*/}
          </Card.Footer>
             </Form> 
        </Card>     
